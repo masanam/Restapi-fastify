@@ -1,7 +1,17 @@
 'use strict'
 require('dotenv').config();
 const fastify = require('./app')
+fastify.register(require('fastify-formbody'));
 
-fastify.listen(process.env.SERVER_PORT, () =>
-  console.log(`Example Rest API with Fastify listening on port ${process.env.SERVER_PORT}!`),
-);
+const start = async () => {
+    try {
+        await fastify.listen(process.env.APP_PORT || 3000);
+
+        fastify.log.info(`server listening on ${fastify.server.address().port}`)
+    } catch (err) {
+        fastify.log.error(err);
+        process.exit(1)
+    }
+};
+
+start();
