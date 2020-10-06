@@ -1,4 +1,4 @@
-# Restapi-fastify
+# Rest API with Fastify and Mysql
 
 <div align="center">
 <img src="https://github.com/fastify/graphics/raw/master/full-logo.png" width="650" height="auto"/>
