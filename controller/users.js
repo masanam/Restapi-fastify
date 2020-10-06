@@ -37,7 +37,46 @@ async function register (request, reply) {
     );
 
     return response.ok(data, `Berhasil registrasi pengguna baru - ${email}`, reply);
-}module.exports = {
-    register
+}
+
+async function login(request, reply) {
+
+    let email = request.body.email;
+    let password = request.body.password;
+    let sql = `SELECT * FROM users WHERE email = ?`;
+
+    let data = await new Promise((resolve) =>
+        connection.query(sql, [email], function (error, rows) {
+                if(error){
+                    console.log(error);
+                    return response.badRequest('', `${error}`, reply)
+                }
+
+                if(rows.length > 0){
+                    let verify = sha1(password) === rows[0].password;
+
+                    let data = {
+                        name: rows[0].name,
+                        email: rows[0].email,
+                        token: rows[0].remember_token
+                    };
+
+                    return verify ? resolve(data) : resolve(false);
+                }
+                else{
+                    return resolve(false);
+                }
+            })
+    );
+
+    if(!data){
+        return response.badRequest('','Email atau password yang anda masukkan salah!', reply)
+    }
+
+    return response.ok(data, `Berhasil login!`, reply);
+}
+
+module.exports = {
+    register, login
 };
 

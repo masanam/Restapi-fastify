@@ -3,5 +3,6 @@ const fastify = require('fastify')({
 });
 const routes = require('./routes')
 fastify.register(routes);
+fastify.register(require('fastify-formbody'));
 
 module.exports = fastify

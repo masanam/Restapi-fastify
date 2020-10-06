@@ -1,7 +1,6 @@
 'use strict'
 require('dotenv').config();
 const fastify = require('./app')
-fastify.register(require('fastify-formbody'));
 
 const start = async () => {
     try {
