@@ -10,8 +10,8 @@ async function routes (fastify, options) {
     fastify.post('/api/users/register', users.register);
     fastify.post('/api/users/login', users.login);
     fastify.post('/api/token', auth.createToken);
-    fastify.get('/news', news.getNewsList);
-    fastify.get('/news/:id', news.getNewsDetail);
+    // fastify.get('/news', news.getNewsList);
+    // fastify.get('/news/:id', news.getNewsDetail);
 }
 
 module.exports = routes;
